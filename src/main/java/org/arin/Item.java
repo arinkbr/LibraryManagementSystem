@@ -11,5 +11,6 @@ public abstract class Item {
     private String title;
     private String status;
 
+    public abstract String getDetails();
 
 }
