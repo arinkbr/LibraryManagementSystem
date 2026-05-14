@@ -23,29 +23,4 @@ public abstract class User {
      * @return CSV formatted string containing user data
      */
     public abstract String toCSV();
-
-    /**
-     * Adds an item to the borrowed item list
-     *
-     * @param item item to borrow
-     */
-    public void borrowItem(Item item) {
-        borrowedItems.add(item);
-    }
-
-    /**
-     * Removes an item from the borrowed item list
-     *
-     * @param item item to return
-     */
-    public void returnItem(Item item) {
-        borrowedItems.remove(item);
-    }
-
-    /**
-     * checks if the user can borrow the item
-     * @param item item to check
-     * @return true if allowed, false otherwise
-     */
-    public abstract boolean canBorrow(Item item);
 }
