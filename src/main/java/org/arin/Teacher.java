@@ -7,4 +7,10 @@ public class Teacher extends User {
     public Teacher(int id, String name) {
         super(id, name);
     }
+
+    @Override
+    public boolean canBorrow(Item item) {
+
+        return getBorrowedItems().size() < MAX_ITEMS;
+    }
 }
