@@ -1,4 +1,4 @@
-package org.arin;
+package com.library.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,5 +95,26 @@ public class Library {
         }
 
         return results;
+    }
+
+    /**
+     * recursively searches for an item by title
+     * @param title title of item to search
+     * @param index current index in the list
+     * @return item if found, otherwise null
+     */
+    public Item recursiveSearchByTitle(String title, int index) {
+
+        if (index >= items.size()) {
+            return null;
+        }
+
+        Item item = items.get(index);
+
+        if (item.getTitle().equalsIgnoreCase(title)) {
+            return item;
+        }
+
+        return recursiveSearchByTitle(title, index + 1);
     }
 }

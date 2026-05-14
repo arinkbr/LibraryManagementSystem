@@ -1,4 +1,4 @@
-package org.arin;
+package com.library.domain;
 import lombok.*;
 
 @Getter
