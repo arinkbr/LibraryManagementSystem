@@ -1,5 +1,10 @@
 package org.arin;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
 public class Student extends User {
 
     private static final int MAX_BOOKS = 5;
