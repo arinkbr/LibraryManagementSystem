@@ -19,6 +19,12 @@ public abstract class User {
     }
 
     /**
+     * Converts user data into CSV format
+     * @return CSV formatted string containing user data
+     */
+    public abstract String toCSV();
+
+    /**
      * Adds an item to the borrowed item list
      *
      * @param item item to borrow
