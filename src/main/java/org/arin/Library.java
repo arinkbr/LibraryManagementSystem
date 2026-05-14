@@ -29,4 +29,28 @@ public class Library {
     public void addUser(User user) {
         users.add(user);
     }
+
+    /**
+     * allows a user to borrow an item
+     * @param user user borrowing an item
+     * @param item item being borrowed
+     */
+    public void borrowItem(User user, Item item) {
+
+        if (!user.canBorrow(item)) {
+            System.out.println("Borrowing not allowed.");
+            return;
+        }
+
+        if (!item.getStatus().equalsIgnoreCase("In Store")) {
+            System.out.println("Item is not available.");
+            return;
+        }
+
+        user.borrowItem(item);
+
+        item.setStatus("Borrowed");
+
+        System.out.println("Item borrowed successfully.");
+    }
 }
