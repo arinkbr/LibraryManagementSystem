@@ -3,6 +3,7 @@ package com.library.domain;
 import lombok.*;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 @Getter
 public abstract class Item {
@@ -37,6 +38,18 @@ public abstract class Item {
                 case ID -> o1.getId().compareTo(o2.getId());
             };
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(title, item.title) && status == item.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, status);
     }
 
     public enum ItemCompareType {
