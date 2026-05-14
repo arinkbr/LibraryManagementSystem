@@ -21,4 +21,12 @@ public class Library {
     public void addItem(Item item) {
         items.add(item);
     }
+
+    /**
+     * adds user to the library
+     * @param user user to add
+     */
+    public void addUser(User user) {
+        users.add(user);
+    }
 }
