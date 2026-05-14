@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Admin extends User {
+public class Admin extends User implements Reportable{
 
     public Admin(int id, String name) {
         super(id, name);
