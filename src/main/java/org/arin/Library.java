@@ -53,4 +53,23 @@ public class Library {
 
         System.out.println("Item borrowed successfully.");
     }
+
+    /**
+     * searches item by title
+     * @param title title to serach
+     * @return list of matching items
+     */
+    public List<Item> searchByTitle(String title) {
+
+        List<Item> results = new ArrayList<>();
+
+        for (Item item : items) {
+
+            if (item.getTitle().equalsIgnoreCase(title)) {
+                results.add(item);
+            }
+        }
+
+        return results;
+    }
 }
