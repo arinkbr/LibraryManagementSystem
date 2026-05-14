@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
-@ToString
 public abstract class User {
+    protected String name;
+    protected List<Item> borrowedItems;
+    protected String id;
 
-    private int id;
-    private String name;
-    private List<Item> borrowedItems;
+    private static int nextId = 1;
 
-    public User(int id, String name) {
-        this.id = id;
+    public User(String name) {
+        this.id = String.format("%04d", nextId++);
         this.name = name;
         this.borrowedItems = new ArrayList<>();
     }
