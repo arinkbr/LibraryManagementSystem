@@ -1,27 +1,13 @@
 package com.library.domain;
 
-import lombok.*;
-import com.library.interfaces.Reportable;
+public class Admin extends User {
 
-@Getter
-@Setter
-@ToString
-public class Admin extends User implements Reportable {
-
-    public Admin(int id, String name) {
-        super(id, name);
+    public Admin(String name) {
+        super(name);
     }
 
     @Override
-    public boolean canBorrow(Item item) {
-
-        return false;
-    }
-
-    /**
-     * Generates a library report.
-     */
-    public void generateReport() {
-        System.out.println("Generating library report...");
+    public String toCSV() {
+        return "admin," + id + "," + name;
     }
 }
