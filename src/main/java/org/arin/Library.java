@@ -13,4 +13,12 @@ public class Library {
         items = new ArrayList<>();
         users = new ArrayList<>();
     }
+
+    /**
+     * Adds an item to the library
+     * @param item item to add
+     */
+    public void addItem(Item item) {
+        items.add(item);
+    }
 }
