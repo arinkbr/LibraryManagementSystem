@@ -13,4 +13,13 @@ public class Magazine extends Item {
         this.issueNumber = issueNumber;
         this.publisher = publisher;
     }
+
+    @Override
+    public String getDetails() {
+        return "Magazine ID: " + getId() +
+                "\nTitle: " + getTitle() +
+                "\nStatus: " + getStatus() +
+                "\nIssue Number: " + issueNumber +
+                "\nPublisher: " + publisher;
+    }
 }
