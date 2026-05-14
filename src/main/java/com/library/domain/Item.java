@@ -27,12 +27,12 @@ public abstract class Item {
     public abstract String toCSV();
 
     @AllArgsConstructor
-    public static class itemComparator implements Comparator<Item> {
-        private ItemCompareType itemCompareType;
+    public static class ItemComparator implements Comparator<Item> {
+        private ItemCompareType ItemCompareType;
 
         @Override
         public int compare(Item o1, Item o2) {
-            return switch (itemCompareType) {
+            return switch (ItemCompareType) {
                 case TITLE -> o1.getTitle().compareToIgnoreCase(o2.getTitle());
                 case STATUS -> o1.getStatus().compareTo(o2.getStatus());
                 case ID -> o1.getId().compareTo(o2.getId());
@@ -60,7 +60,7 @@ public abstract class Item {
 
     public enum Status {
         BORROWED,
-        INSTORE,
+        IN_STORE,
         LOST
     }
 }
