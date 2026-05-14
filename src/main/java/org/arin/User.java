@@ -1,8 +1,12 @@
 package org.arin;
 
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
 public abstract class User {
 
     private int id;

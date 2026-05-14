@@ -1,5 +1,10 @@
 package org.arin;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
 public class Magazine extends Item {
 
     private int issueNumber;
