@@ -11,4 +11,11 @@ public class Admin extends User {
 
         return false;
     }
+
+    /**
+     * Generates a library report.
+     */
+    public void generateReport() {
+        System.out.println("Generating library report...");
+    }
 }
