@@ -2,6 +2,7 @@ package com.library.domain;
 
 import lombok.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
@@ -23,4 +24,22 @@ public abstract class User {
      * @return CSV formatted string containing user data
      */
     public abstract String toCSV();
+
+    @AllArgsConstructor
+    public static class UserComparator implements Comparator<User> {
+        private UserCompareType userCompareType;
+
+        @Override
+        public int compare(User o1, User o2) {
+            return switch (userCompareType) {
+                case NAME -> o1.getName().compareToIgnoreCase(o2.getName());
+                case ID -> o1.getId().compareTo(o2.getId());
+            };
+        }
+    }
+
+    public enum UserCompareType {
+        NAME,
+        ID
+    }
 }
