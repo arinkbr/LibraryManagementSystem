@@ -72,4 +72,28 @@ public class Library {
 
         return results;
     }
+
+    /**
+     * searches books by author
+     * @param author author name to search
+     * @return list of matching books
+     */
+    public List<Item> searchByAuthor(String author) {
+
+        List<Item> results = new ArrayList<>();
+
+        for (Item item : items) {
+
+            if (item instanceof Book) {
+
+                Book book = (Book) item;
+
+                if (book.getAuthor().equalsIgnoreCase(author)) {
+                    results.add(book);
+                }
+            }
+        }
+
+        return results;
+    }
 }
