@@ -1,5 +1,10 @@
 package org.arin;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
 public class Admin extends User {
 
     public Admin(int id, String name) {
