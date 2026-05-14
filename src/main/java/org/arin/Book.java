@@ -1,5 +1,10 @@
 package org.arin;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
 public class Book extends Item {
 
     private String isbn;
