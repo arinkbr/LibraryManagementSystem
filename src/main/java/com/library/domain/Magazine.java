@@ -3,24 +3,20 @@ package com.library.domain;
 import lombok.*;
 
 @Getter
-@Setter
-@ToString
 public class Magazine extends Item {
-
     private int issueNumber;
     private String publisher;
 
-    public Magazine(int id, String title, String status,
+    public Magazine(int id, String title, Status status,
                     int issueNumber, String publisher) {
 
-        super(id, title, status);
-
+        super(title, status);
         this.issueNumber = issueNumber;
         this.publisher = publisher;
     }
 
     @Override
-    public String getDetails() {
+    public String toCSV() {
         return "Magazine ID: " + getId() +
                 "\nTitle: " + getTitle() +
                 "\nStatus: " + getStatus() +
