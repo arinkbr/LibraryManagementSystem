@@ -7,4 +7,14 @@ public class Student extends User {
     public Student(int id, String name) {
         super(id, name);
     }
+
+    @Override
+    public boolean canBorrow(Item item) {
+
+        if (!(item instanceof Book)) {
+            return false;
+        }
+
+        return getBorrowedItems().size() < MAX_BOOKS;
+    }
 }
