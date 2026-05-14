@@ -12,4 +12,14 @@ public class DVD extends Item {
 
         this.director = director;
         this.duration = duration;
+    }
+
+    @Override
+    public String getDetails() {
+        return "DVD ID: " + getId() +
+                "\nTitle: " + getTitle() +
+                "\nStatus: " + getStatus() +
+                "\nDirector: " + director +
+                "\nDuration: " + duration + " minutes";
+    }
 }
