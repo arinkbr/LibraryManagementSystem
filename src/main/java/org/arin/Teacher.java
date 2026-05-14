@@ -1,5 +1,10 @@
 package org.arin;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
 public class Teacher extends User {
 
     private static final int MAX_ITEMS = 10;
