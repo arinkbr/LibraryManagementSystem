@@ -22,4 +22,12 @@ public abstract class User {
     public void borrowItem(Item item) {
         borrowedItems.add(item);
     }
+
+    /**
+     * Removes an item from the borrowed item list
+     * @param item item to return
+     */
+    public void returnItem(Item item) {
+        borrowedItems.remove(item);
+    }
 }
