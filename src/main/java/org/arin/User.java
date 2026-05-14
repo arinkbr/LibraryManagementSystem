@@ -14,4 +14,12 @@ public abstract class User {
         this.name = name;
         this.borrowedItems = new ArrayList<>();
     }
+
+    /**
+     * Adds an item to the borrowed item list
+     * @param item item to borrow
+     */
+    public void borrowItem(Item item) {
+        borrowedItems.add(item);
+    }
 }
