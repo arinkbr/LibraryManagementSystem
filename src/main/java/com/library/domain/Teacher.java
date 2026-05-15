@@ -8,6 +8,8 @@ public class Teacher extends User {
 
     @Override
     public String toCSV() {
-        return "teacher," + id + "," + name;
+        return "teacher," +
+                getName() + "," +
+                getId() + "\n";
     }
 }

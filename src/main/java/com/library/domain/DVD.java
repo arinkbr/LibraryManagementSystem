@@ -20,10 +20,10 @@ public class DVD extends Item {
 
     @Override
     public String toCSV() {
-        return "DVD ID: " + getId() +
-                "\nTitle: " + getTitle() +
-                "\nStatus: " + getStatus() +
-                "\nDirector: " + director +
-                "\nDuration: " + duration + " minutes";
+        return "dvd," +
+                getTitle() + "," +
+                getStatus() + "," +
+                director + "," +
+                duration + "\n";
     }
 }

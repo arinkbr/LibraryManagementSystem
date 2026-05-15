@@ -1,5 +1,6 @@
 package com.library.domain;
 
+import com.library.util.Validation;
 import lombok.*;
 
 @Getter
@@ -14,15 +15,19 @@ public class Book extends Item {
         this.isbn = isbn;
         this.author = author;
         this.genre = genre;
+
+        if (!Validation.isValidISBN(isbn)) {
+            throw new RuntimeException("Invalid ISBN");
+        }
     }
 
     @Override
     public String toCSV() {
-        return "Book ID: " + getId() +
-                "\nTitle: " + getTitle() +
-                "\nStatus: " + getStatus() +
-                "\nISBN: " + isbn +
-                "\nAuthor: " + author +
-                "\nGenre: " + genre;
+        return "book," +
+                getTitle() + "," +
+                getStatus() + "," +
+                isbn + "," +
+                author + "," +
+                genre + "\n";
     }
 }

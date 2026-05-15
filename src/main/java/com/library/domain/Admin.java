@@ -8,6 +8,8 @@ public class Admin extends User {
 
     @Override
     public String toCSV() {
-        return "admin," + id + "," + name;
+        return "admin," +
+                getName() + "," +
+                getId() + "\n";
     }
 }

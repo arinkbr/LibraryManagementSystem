@@ -17,10 +17,10 @@ public class Magazine extends Item {
 
     @Override
     public String toCSV() {
-        return "Magazine ID: " + getId() +
-                "\nTitle: " + getTitle() +
-                "\nStatus: " + getStatus() +
-                "\nIssue Number: " + issueNumber +
-                "\nPublisher: " + publisher;
+        return "magazine," +
+                getTitle() + "," +
+                getStatus() + "," +
+                issueNumber + "," +
+                publisher + "\n";
     }
 }

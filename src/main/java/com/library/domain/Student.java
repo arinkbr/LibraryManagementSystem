@@ -12,6 +12,8 @@ public class Student extends User {
 
     @Override
     public String toCSV() {
-        return "student," + id + "," + name;
+        return "student," +
+                getName() + "," +
+                getId() + "\n";
     }
 }

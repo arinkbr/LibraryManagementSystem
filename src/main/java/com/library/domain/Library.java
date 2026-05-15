@@ -209,7 +209,7 @@ public class Library implements Reportable {
         }
 
         if (matches) {
-            result.addFirst(current);
+            result.add(0,current);
         }
 
         return result;
@@ -232,6 +232,14 @@ public class Library implements Reportable {
         }
 
         return report;
+    }
+
+    public void sortItems(Item.ItemCompareType type) {
+        items.sort(new Item.ItemComparator(type));
+    }
+
+    public void sortUsers(User.UserCompareType type) {
+        users.sort(new User.UserComparator(type));
     }
 
     public enum SearchType {
