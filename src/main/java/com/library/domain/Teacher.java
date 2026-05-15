@@ -2,7 +2,7 @@ package com.library.domain;
 
 public class Teacher extends User {
 
-    public Teacher(int id, String name) {
+    public Teacher(String name) {
         super(name);
     }
 

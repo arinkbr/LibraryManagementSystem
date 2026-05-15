@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @ToString
 public class Student extends User {
-    public Student(int id, String name) {
+    public Student(String name) {
         super(name);
     }
 

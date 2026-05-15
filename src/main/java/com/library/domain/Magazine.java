@@ -7,7 +7,7 @@ public class Magazine extends Item {
     private int issueNumber;
     private String publisher;
 
-    public Magazine(int id, String title, Status status,
+    public Magazine(String title, Status status,
                     int issueNumber, String publisher) {
 
         super(title, status);

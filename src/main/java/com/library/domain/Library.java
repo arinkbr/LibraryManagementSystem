@@ -1,11 +1,19 @@
 package com.library.domain;
 
+import com.library.interfaces.Reportable;
+import com.library.util.Constants;
+import lombok.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Library {
-
-
+@Getter
+@Setter
+@AllArgsConstructor
+public class Library implements Reportable {
     private List<Item> items;
     private List<User> users;
 
@@ -15,106 +23,56 @@ public class Library {
     }
 
     /**
-     * Adds an item to the library
-     * @param item item to add
+     * Loads users and items from CSV files and initializes them into a library
+     * @return A library containing the initialized users and item
      */
-    public void addItem(Item item) {
-        items.add(item);
-    }
+    public static Library init() {
+        Library library = new Library();
+        List<Item> items = library.getItems();
+        List<User> users = library.getUsers();
 
-    /**
-     * adds user to the library
-     * @param user user to add
-     */
-    public void addUser(User user) {
-        users.add(user);
-    }
+        File itemsCSV = new File(Constants.ITEMS_CSV_PATH);
+        File usersCSV = new File(Constants.USERS_CSV_PATH);
 
-    /**
-     * allows a user to borrow an item
-     * @param user user borrowing an item
-     * @param item item being borrowed
-     */
-    public void borrowItem(User user, Item item) {
+        try (Scanner scanner = new Scanner(itemsCSV)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] elements = line.split(",");
 
-        if (!user.canBorrow(item)) {
-            System.out.println("Borrowing not allowed.");
-            return;
-        }
+                String itemType = elements[0];
+                String itemTitle = elements[1];
+                Item.Status itemStatus = Item.Status.valueOf(elements[2].toUpperCase());
 
-        if (!item.getStatus().equalsIgnoreCase("In Store")) {
-            System.out.println("Item is not available.");
-            return;
-        }
-
-        user.borrowItem(item);
-
-        item.setStatus("Borrowed");
-
-        System.out.println("Item borrowed successfully.");
-    }
-
-    /**
-     * searches item by title
-     * @param title title to serach
-     * @return list of matching items
-     */
-    public List<Item> searchByTitle(String title) {
-
-        List<Item> results = new ArrayList<>();
-
-        for (Item item : items) {
-
-            if (item.getTitle().equalsIgnoreCase(title)) {
-                results.add(item);
-            }
-        }
-
-        return results;
-    }
-
-    /**
-     * searches books by author
-     * @param author author name to search
-     * @return list of matching books
-     */
-    public List<Item> searchByAuthor(String author) {
-
-        List<Item> results = new ArrayList<>();
-
-        for (Item item : items) {
-
-            if (item instanceof Book) {
-
-                Book book = (Book) item;
-
-                if (book.getAuthor().equalsIgnoreCase(author)) {
-                    results.add(book);
+                switch (itemType) {
+                    case "book" -> items.add(new Book(itemTitle, itemStatus, elements[3], elements[4], elements[5]));
+                    case "dvd" -> items.add(new DVD(itemTitle, itemStatus, elements[3], Integer.parseInt(elements[4])));
+                    case "magazine" -> items.add(new Magazine(itemTitle, itemStatus, Integer.parseInt(elements[3]), elements[4]));
+                    default -> throw new RuntimeException("Unknown item type: " + itemType);
                 }
             }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
-        return results;
-    }
+        try (Scanner scanner = new Scanner(usersCSV)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] elements = line.split(",");
 
-    /**
-     * recursively searches for an item by title
-     * @param title title of item to search
-     * @param index current index in the list
-     * @return item if found, otherwise null
-     */
-    public Item recursiveSearchByTitle(String title, int index) {
+                String userType = elements[0];
+                String userName = elements[1];
 
-        if (index >= items.size()) {
-            return null;
+                switch (userType) {
+                    case "student" -> users.add(new Student(userName));
+                    case "teacher" -> users.add(new Teacher(userName));
+                    case "admin" -> users.add(new Admin(userName));
+                    default -> throw new RuntimeException("Unknown user type: " + userType);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw  new RuntimeException(e);
         }
 
-        Item item = items.get(index);
-
-        if (item.getTitle().equalsIgnoreCase(title)) {
-            return item;
-        }
-
-        return recursiveSearchByTitle(title, index + 1);
+        return library;
     }
 }
