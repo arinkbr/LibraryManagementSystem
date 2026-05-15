@@ -8,9 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @Getter
 @Setter
@@ -157,5 +155,69 @@ public class Library implements Reportable {
             user.getBorrowedItems().remove(item);
             item.setStatus(Item.Status.IN_STORE);
         }
+    }
+
+    /**
+     * Searches for items in the library using a specified search implementation.
+     * @param keyword The keyword used to filter items
+     * @param searchType The search implementation to use
+     * @return A list of items that match the given keyword using the selected implementation
+     */
+    public List<Item> search(String keyword, SearchType searchType) {
+        return switch (searchType) {
+            case STREAM -> searchStream(keyword);
+            case RECURSIVE -> searchRecursive(keyword, 0);
+        };
+    }
+
+    /**
+     * Searches for items whose title or, when applicable, author matches a given keyword using a stream-based implementation
+     * @param keyword The keyword used to filter items
+     * @return A list of items whose title or author matches the keyword
+     */
+    public List<Item> searchStream(String keyword) {
+        Set<Item> set = new LinkedHashSet<>(items);
+        return set.stream()
+                .filter(item -> {
+                    boolean containsKeyword = item.getTitle().toLowerCase().contains(keyword.toLowerCase());
+                    if (item instanceof Book book) {
+                        containsKeyword = containsKeyword || book.getAuthor().toLowerCase().contains(keyword.toLowerCase());
+                    }
+                    return containsKeyword;
+                })
+                .toList();
+    }
+
+    /**
+     * Searches for items whose title or, when applicable, author matches a given keyword using a recursive implementation
+     * @param keyword The keyword used to filter items
+     * @param index The current position of the items list from which to continue the search
+     * @return A list of items whose title or author matches the keyword
+     */
+    public List<Item> searchRecursive(String keyword, int index) {
+        if (index >= items.size()) {
+            return new ArrayList<>();
+        }
+
+        List<Item> result = searchRecursive(keyword, index + 1);
+
+        Item current = items.get(index);
+        boolean matches = current.getTitle().toLowerCase().contains(keyword.toLowerCase());
+
+        if (current instanceof Book book) {
+            matches = matches || book.getAuthor().toLowerCase().contains(keyword.toLowerCase());
+        }
+
+        if (matches) {
+            result.addFirst(current);
+        }
+
+        return result;
+    }
+
+
+    public enum SearchType {
+        STREAM,
+        RECURSIVE
     }
 }
