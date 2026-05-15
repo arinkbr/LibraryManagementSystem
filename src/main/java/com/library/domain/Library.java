@@ -106,4 +106,42 @@ public class Library implements Reportable {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Allows a user to borrow a specified item in the library
+     * @param user The user requesting the item
+     * @param item The item to be borrowed
+     */
+    public void borrowItem(User user, Item item) {
+        if (!users.contains(user)) {
+            throw new RuntimeException("User not found in the library");
+        }
+
+        if (!items.contains(item)) {
+            throw new RuntimeException("Item not found in the library");
+        }
+
+        if (item.getStatus().equals(Item.Status.BORROWED)) {
+            throw new RuntimeException("Item already borrowed");
+        }
+
+        if (user instanceof Student) {
+            if (user.borrowedItems.size() >= Constants.MAX_BOOKS_STUDENT) {
+                throw new RuntimeException("Student borrowing limit attained");
+            }
+
+            if (!(item instanceof Book)) {
+                throw new RuntimeException("Student can only borrow books");
+            }
+        }
+
+        if (user instanceof Teacher) {
+            if (user.borrowedItems.size() >= Constants.MAX_ITEMS_TEACHER) {
+                throw  new RuntimeException("Teacher borrowing limit achieved");
+            }
+        }
+
+        user.getBorrowedItems().add(item);
+        item.setStatus(Item.Status.BORROWED);
+    }
 }
