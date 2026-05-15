@@ -215,6 +215,24 @@ public class Library implements Reportable {
         return result;
     }
 
+    @Override
+    public Map<Item.Status, List<Item>> generateReport(User user) {
+        if (!(user instanceof Admin)) {
+            throw new RuntimeException("Only admins can generate reports");
+        }
+
+        if (!users.contains(user)) {
+            throw new RuntimeException("User not found in the library");
+        }
+
+        Map<Item.Status, List<Item>> report = new LinkedHashMap<>();
+        for (Item.Status status : Item.Status.values()) {
+            report.put(status, items.stream().filter(item -> item.getStatus() == status).toList()
+            );
+        }
+
+        return report;
+    }
 
     public enum SearchType {
         STREAM,
