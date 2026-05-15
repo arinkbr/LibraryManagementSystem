@@ -1,5 +1,5 @@
 import com.library.domain.*;
-import com.library.util.Constants;
+import com.library.utils.Constants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package com.library.domain;
 
 import com.library.interfaces.Reportable;
-import com.library.util.Constants;
+import com.library.utils.Constants;
 import lombok.*;
 
 import java.io.File;

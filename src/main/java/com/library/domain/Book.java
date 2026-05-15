@@ -1,6 +1,6 @@
 package com.library.domain;
 
-import com.library.util.Validation;
+import com.library.utils.Validation;
 import lombok.*;
 
 @Getter

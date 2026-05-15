@@ -1,4 +1,4 @@
-import com.library.util.Validation;
+import com.library.utils.Validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
