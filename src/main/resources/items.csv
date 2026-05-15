@@ -1,0 +1,6 @@
+book,Harry Potter,IN_STORE,1234567890123,J.K Rowling,Fantasy,1
+book,The Hobbit,BORROWED,9876543210123,J.R.R Tolkien,Fantasy,2
+dvd,Interstellar,IN_STORE,Christopher Nolan,169,3
+dvd,Inception,BORROWED,Christopher Nolan,148,4
+magazine,Science Weekly,IN_STORE,45,Nature,5
+magazine,Tech Today,LOST,12,TechWorld,6
