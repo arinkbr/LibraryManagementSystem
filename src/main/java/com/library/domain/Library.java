@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -74,5 +76,34 @@ public class Library implements Reportable {
         }
 
         return library;
+    }
+
+    /**
+     * Backups current users and items into two CSV files
+     * @param actUser The user initiating the backup command
+     */
+    public void backup(User actUser) {
+        if (!(actUser instanceof Admin)) {
+            throw new RuntimeException("Only admins can backup library data");
+        }
+
+        File itemsBackupCSV = new File(Constants.ITEMS_BACKUP_CSV_PATH);
+        File usersBackupCSV = new File(Constants.USERS_BACKUP_CSV_PATH);
+
+        try (FileWriter fileWriter = new FileWriter(itemsBackupCSV)){
+            for (Item item : items) {
+                fileWriter.write(item.toCSV());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try (FileWriter fileWriter = new FileWriter(usersBackupCSV)){
+            for (User user : users) {
+                fileWriter.write(user.toCSV());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
