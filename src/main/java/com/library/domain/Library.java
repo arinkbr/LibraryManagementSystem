@@ -144,4 +144,18 @@ public class Library implements Reportable {
         user.getBorrowedItems().add(item);
         item.setStatus(Item.Status.BORROWED);
     }
+
+    /**
+     * Allows a user to return a borrowed item to the library
+     * @param user The user returning the item
+     * @param item The item to be returned
+     */
+    public void returnItem(User user, Item item) {
+        if (!user.getBorrowedItems().contains(item)) {
+            throw new RuntimeException("Item not found in user's borrowed items");
+        } else {
+            user.getBorrowedItems().remove(item);
+            item.setStatus(Item.Status.IN_STORE);
+        }
+    }
 }
