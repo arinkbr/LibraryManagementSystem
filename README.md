@@ -13,4 +13,4 @@ For more information on how to use the program, refer to the [user guide](./USER
 
 ### Class Diagram:
 
-![diagram](src/main/resources/ClassDiagram)
+![diagram](src/main/resources/ClassDiagram.jpg)
